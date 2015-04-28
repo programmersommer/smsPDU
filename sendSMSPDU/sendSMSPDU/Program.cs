@@ -115,8 +115,6 @@ namespace sendSMSPDU
 
         private static void OpenPort()
         {
-            string[] pn;
-            pn = SerialPort.GetPortNames();
 
             port.BaudRate = 2400; // еще варианты 4800, 9600, 28800 или 56000
             port.DataBits = 7; // еще варианты 8, 9

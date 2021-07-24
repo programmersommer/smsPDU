@@ -148,16 +148,16 @@ namespace sendSMSPDU
         // перекодирование номера телефона для формата PDU
         public static string EncodePhoneNumber(string PhoneNumber)
         {
-            string result = "";
+            var resultBuilder = new StringBuilder();
             if ((PhoneNumber.Length % 2) > 0) PhoneNumber += "F";
 
             int i = 0;
             while (i < PhoneNumber.Length)
             {
-                result += PhoneNumber[i + 1].ToString() + PhoneNumber[i].ToString();
+                resultBuilder.Append(PhoneNumber[i + 1].ToString() + PhoneNumber[i].ToString());
                 i += 2;
             }
-            return result.Trim();
+            return resultBuilder.ToString().Trim();
         }
 
 

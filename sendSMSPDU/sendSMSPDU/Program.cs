@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-
-// добавим
 using System.IO.Ports;
+using System.Text;
 
 
 namespace sendSMSPDU
@@ -77,7 +72,7 @@ namespace sendSMSPDU
 
                 // посылаем команду с длинной сообщения - количество октет в десятичной системе. то есть делим на два количество символов в сообщении
                 // если октет неполный, то получится в результате дробное число. это дробное число округляем до большего
-                double lenMes = textsms.Length / 2;
+                double lenMes = (double)textsms.Length / 2;
                 port.Write("AT+CMGS=" + (Math.Ceiling(lenMes)).ToString() + "\r\n");
                 System.Threading.Thread.Sleep(500);
 
@@ -105,7 +100,10 @@ namespace sendSMSPDU
                 }
 
             }
-            catch { }
+            catch
+            {
+                // just ignoring this case for now
+            }
 
             return true;
         }
@@ -141,11 +139,11 @@ namespace sendSMSPDU
             {
                 port.Open();
             }
-            catch { }
-
+            catch
+            {
+                // just ignoring this case for now
+            }
         }
-
-
 
         // перекодирование номера телефона для формата PDU
         public static string EncodePhoneNumber(string PhoneNumber)
@@ -179,7 +177,6 @@ namespace sendSMSPDU
             }
             return BitConverter.ToString(ucs2).Replace("-", "");
         }
-
 
     }
 }
